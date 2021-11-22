@@ -10,10 +10,13 @@ import kp from './keypair.json';
 // SystemProgram is a reference to the Solana runtime!
 const { SystemProgram, Keypair } = web3;
 
-// Get the keypair for the account that will hold the GIF data.
-const arr = Object.values(kp._keypair.secretKey);
-const secret = new Uint8Array(arr);
-const baseAccount = web3.Keypair.fromSecretKey(secret);
+// Create a keypair for the account that will hold the GIF data.
+let baseAccount = Keypair.generate();
+
+// For testing lcoally, use the keypair from the keypair.json file.
+// const arr = Object.values(kp._keypair.secretKey);
+// const secret = new Uint8Array(arr);
+// const baseAccount = web3.Keypair.fromSecretKey(secret);
 
 // Get our program's id from the IDL file.
 const programID = new PublicKey(idl.metadata.address);
